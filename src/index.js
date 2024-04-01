@@ -1,13 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Home from './component/Home';
+import { BrowserRouter,Routes,Route} from 'react-router-dom';
+import Login from './component/user/Login';
+
+
+export default function App() {
+
+  return (
+  
+  < BrowserRouter basename='/' >
+  <Routes>
+    <Route path='/' element="ini home saya" />
+    <Route path='/about-us' element="Perihal mengenaai saya" />
+    <Route path='/mypage' Component={Login}></Route>
+  </Routes>
+</BrowserRouter>
+)
+
+
+}
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <Home></Home>
-);
+root.render(<App />);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
 
