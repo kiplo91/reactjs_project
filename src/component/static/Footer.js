@@ -1,9 +1,13 @@
+import Login from "../user/Login";
+import '../../index.css';
+
 const Footer =  () =>{
 
     return (
 
         <>
-        <h1> HI this is Footer js</h1>
+        
+
         </>
     )
 
