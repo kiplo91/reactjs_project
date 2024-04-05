@@ -1,69 +1,112 @@
+import { Box, Button, TextField, Typography } from "@mui/material";
 import "../../index.css";
 import { useState } from "react";
+import { useBeforeUnload } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [isSignedUp, setisSignedUp] = useState(false);
+  const [inputs, setinputs] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleChange = (e) => {
+    setinputs((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-    console.log("Email:", email);
-    console.log("Password:", password);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  const resetState = () => {
+    setisSignedUp(!isSignedUp);
+    setinputs({
+      name: "",
+      email: "",
+      password: "",
+    });
   };
 
   return (
     <>
-      <div class="bg-white p-8 rounded shadow-md w-80">
-        <h2 class="text-2xl mb-4">Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div class="mb-4">
-            <label
-              for="email"
-              class="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Email
-            </label>
-            <input
+      <form onSubmit={handleSubmit}>
+        <Box
+          display="flex"
+          flexDirection={"column"}
+          maxWidth={400}
+          alignItems="center"
+          justifyContent="center"
+          margin="auto"
+          marginTop={5}
+          padding={3}
+          borderRadius={5}
+          boxShadow={"5px 5px 10px #ccc"}
+          sx={{
+            ":hover": {
+              boxShadow: "10px 10px 20px #ccc",
+            },
+          }}
+        >
+          <Typography variant="h2" padding={3} textAlign="center">
+            {isSignedUp ? "Sign Up" : "Login"}
+          </Typography>
+          {isSignedUp && (
+            <TextField
+              name="name"
+              value={inputs.name}
+              margin="normal"
               type="text"
-              value={email}
-              id="email"
-              name="email"
-              class="w-full px-3 py-2 border rounded-md"
-              onChange={(event) => setEmail(event.target.value)}
+              variant="outlined"
+              placeholder="Name"
+              onChange={handleChange}
             />
-          </div>
-          <div class="mb-4">
-            <label
-              for="password"
-              class="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              value={password}
-              id="password"
-              name="password"
-              class="w-full px-3 py-2 border rounded-md"
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </div>
-          <div class="mb-6">
-            <button
-              type="submit"
-              class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
-            >
-              Sign In
-            </button>
-          </div>
-          <div class="text-center">
-            <a href="#" class="text-sm text-blue-500 hover:text-blue-700">
-              Forgot Password?
-            </a>
-          </div>
-        </form>
-      </div>
+          )}
+
+          <TextField
+            value={inputs.email}
+            name="email"
+            margin="normal"
+            onChange={handleChange}
+            type="email"
+            variant="outlined"
+            placeholder="Email"
+          ></TextField>
+
+          <TextField
+            value={inputs.password}
+            name="password"
+            margin="normal"
+            type="password"
+            variant="outlined"
+            placeholder="Password"
+            onChange={handleChange}
+          ></TextField>
+          <Button
+            type="submit"
+            sx={{
+              marginTop: 3,
+              borderRadius: 3,
+            }}
+            variant="contained"
+            color="warning"
+          >
+            {isSignedUp ? "Sign Up" : "Login"}
+          </Button>
+          <Button
+            sx={{
+              marginTop: 3,
+              borderRadius: 3,
+            }}
+            onClick={resetState}
+          >
+            Change to {isSignedUp ? "Login" : "Signup"}
+          </Button>
+        </Box>
+      </form>
     </>
   );
 };

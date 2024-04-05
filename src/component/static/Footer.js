@@ -1,21 +1,11 @@
-import Login from "../user/Login";
-import '../../index.css';
+import React from 'react';
 
-const Footer =  () =>{
-
+const Footer = () => {
     return (
-
-        <>
-        
-
-        </>
-    )
-
-        
-
-
-    
-
-}
+        <div>
+            
+        </div>
+    );
+};
 
 export default Footer;
